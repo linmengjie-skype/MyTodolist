@@ -4,12 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <TextView
-        android:id="@+id/show"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#f9f" />
-
 
 
     <CalendarView
@@ -23,14 +17,27 @@
         android:weekSeparatorLineColor="#ff0"
         android:unfocusedMonthDateColor="#f9f"
         />
-
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fba"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true"
         android:layout_marginLeft="300dp"
+        android:src="@drawable/add"
         app:srcCompat="@color/colorAccent" />
+
+
+    <TextView
+        android:id="@+id/show"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#f9f" />
+    <ListView
+        android:id="@+id/lv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </ListView>
 
 
 </LinearLayout>

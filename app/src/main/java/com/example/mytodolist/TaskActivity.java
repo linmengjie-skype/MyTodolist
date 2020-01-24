@@ -55,6 +55,7 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 db = dbHelper.getWritableDatabase();
+                //存储数据
                 ContentValues values = new ContentValues();
                 values.put("TaskName", editText.getText().toString());
                 values.put("TIME", time.getText().toString());
@@ -69,7 +70,7 @@ public class TaskActivity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.list_view);
         initListNoteListener();
     }
-
+// 刷新数据
     protected void onResume() {
         super.onResume();
         mData = getTaskList();
@@ -79,10 +80,13 @@ public class TaskActivity extends AppCompatActivity {
 
 
     public ArrayList<TodoItem> getTaskList() {
+        //todoitem对象的数据传入arraylist
         ArrayList<TodoItem> taskList = new ArrayList<TodoItem>();
+        //读取数据
         db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query("task", null, "TIME=?", new String[]{time.getText().toString()}, null, null, null);
-        if (cursor.moveToFirst()) {
+        Cursor cursor = db.query("task", new String[] {"TIME", "ID", "TaskName"}, "TIME=?", new String[]{time.getText().toString()}, null, null, null);
+        //如果能读取到第一行的话（就是数据库不为空的话）再读取每行数据库
+        if (cursor.getCount()>0) {
             while (cursor.moveToNext()) {
                 TodoItem todoItem = new TodoItem();
                 String id= cursor.getString(cursor.getColumnIndex("ID"));
@@ -102,9 +106,9 @@ public class TaskActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, final long id) {
                 new AlertDialog.Builder(TaskActivity.this)
-                        .setTitle("提示框")
-                        .setMessage("确认删除该笔记？？")
-                        .setPositiveButton("确定",
+                        .setTitle("Alert")
+                        .setMessage("Do you want to delete this task ?")
+                        .setPositiveButton("yes",
                                 new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface arg0, int arg1) {
@@ -115,11 +119,11 @@ public class TaskActivity extends AppCompatActivity {
                                         mData.remove(position);
                                         Toast.makeText(
                                                 TaskActivity.this,
-                                                "删除成功！！",
+                                                "successfully deleted",
                                                 Toast.LENGTH_LONG)
                                                 .show();
                                     }
-                                }).setNegativeButton("取消", null).show();
+                                }).setNegativeButton("no", null).show();
                 return true;
             }
         });
