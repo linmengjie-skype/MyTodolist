@@ -84,7 +84,8 @@ public class TaskActivity extends AppCompatActivity {
         ArrayList<TodoItem> taskList = new ArrayList<TodoItem>();
         //读取数据
         db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.query("task", new String[] {"TIME", "ID", "TaskName"}, "TIME=?", new String[]{time.getText().toString()}, null, null, null);
+        Cursor cursor = db.query("task", new String[] {"TIME", "ID", "TaskName"},
+                "TIME=?", new String[]{time.getText().toString()}, null, null, null);
         //如果能读取到第一行的话（就是数据库不为空的话）再读取每行数据库
         if (cursor.getCount()>0) {
             while (cursor.moveToNext()) {
@@ -100,7 +101,7 @@ public class TaskActivity extends AppCompatActivity {
         db.close();
         return taskList;
     }
-
+//删除
     private void initListNoteListener() {
         listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

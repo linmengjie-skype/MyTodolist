@@ -31,11 +31,12 @@
         android:id="@+id/show"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#f9f" />
+        android:background="#FF3E96" />
     <ListView
         android:id="@+id/lv"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp">
 
     </ListView>
 
